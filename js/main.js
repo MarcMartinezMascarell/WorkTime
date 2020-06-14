@@ -1,3 +1,5 @@
+//Animacion Login
+
 $('.toggle').click(function(){
     $('.formulario').animate({
         height: "toggle",
