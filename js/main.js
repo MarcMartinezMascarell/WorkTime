@@ -1,11 +1,10 @@
 //Asignación variables
 var projectsView = document.getElementById('projects');
 
-
-
 document.getElementById('formTask').addEventListener('submit', saveProject);
 
 
+//Función para guardar los proyectos en Local Storage
 function saveProject(e){
 
     let title = document.getElementById('title').value;
@@ -31,6 +30,7 @@ function saveProject(e){
     e.preventDefault();
 }
 
+//Función para añadir los proyectos guardados a la lista
 function getProject() {
     let projects = JSON.parse(localStorage.getItem('projects'));
     projectsView.innerHTML = '';
@@ -48,8 +48,11 @@ function getProject() {
     }
 }
 
+//Actualizamos los proyectos por si acaso
 getProject();
 
+
+//Función para borrar proyectos al pulsar el boton de Borrar
 function deleteProject(title){
 
     let confirmation = confirm("Esta seguro que desea borrar el proyecto?");
@@ -67,6 +70,13 @@ function deleteProject(title){
 
 }
 
+/*function showDescription() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}
+*/
+
+//Función para mostrar la descripción al pulsar en el titulo del proyecto
 function showDescription(title){
     let projects = JSON.parse(localStorage.getItem('projects'));
 
