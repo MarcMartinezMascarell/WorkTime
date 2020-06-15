@@ -1,18 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-body {
-    background: url(../img/few-books-stacked-in-pile-on-table-4219042.jpg);
-    background-size: cover;
-    background-attachment: fixed;
-    font-family: Roboto;
-}
-
+/*LOGIN */
 .contenedor-form {
     position: relative;
     background: rgba(0,0,0,.7);
@@ -117,3 +103,6 @@ body {
 .contenedor-form .formulario:nth-child(2) {
     display: block;
 }
+
+/*INDEX*/
+
