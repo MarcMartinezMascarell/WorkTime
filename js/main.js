@@ -1,4 +1,10 @@
+//Asignación variables
+var projectsView = document.getElementById('projects');
+
+
+
 document.getElementById('formTask').addEventListener('submit', saveProject);
+
 
 function saveProject(e){
 
@@ -27,8 +33,6 @@ function saveProject(e){
 
 function getProject() {
     let projects = JSON.parse(localStorage.getItem('projects'));
-    let projectsView = document.getElementById('projects');
-
     projectsView.innerHTML = '';
 
     for(let i = 0; i < projects.length; i++){
@@ -36,8 +40,9 @@ function getProject() {
         let description = projects[i].description;
         projectsView.innerHTML += `<div class="card mb-3">
             <div class="card-body">
-                <p><span class="font-weight-bold">${title}</span> - ${description}</p>
-                <a class="btn btn-danger" onclick="deleteProject('${title}')">Borrar</a>
+                <a class="font-weight-bold" onclick="showDescription('${title}')">${title}</a>
+                <p style="display:none">${description}</p>
+                <a class="btn btn-danger ml-4" onclick="deleteProject('${title}')">Borrar</a>
             </div>
         </div>`
     }
@@ -60,4 +65,16 @@ function deleteProject(title){
     getProject();
     }
 
+}
+
+function showDescription(title){
+    let projects = JSON.parse(localStorage.getItem('projects'));
+
+    for(let i = 0; i < projects.length; i++){
+        if(projects[i].title == title){
+            let descripcion = projects[i].description;
+            console.log(descripcion);
+        }
+    }
+    localStorage.setItem('projects', JSON.stringify(projects));
 }
