@@ -40,9 +40,12 @@ function getProject() {
         let description = projects[i].description;
         projectsView.innerHTML += `<div class="card mb-3">
             <div class="card-body">
-                <a class="font-weight-bold" onclick="showDescription('${title}')">${title}</a>
-                <p style="display:none">${description}</p>
+                <a class="font-weight-bold" onclick="showDescription(${i})">${title}</a>
+                <p style="display:none" id="d` +i + `">${description}</p>
                 <a class="btn btn-danger ml-4" onclick="deleteProject('${title}')">Borrar</a>
+            </div>
+            <div>
+
             </div>
         </div>`
     }
@@ -77,14 +80,22 @@ function deleteProject(title){
 */
 
 //Función para mostrar la descripción al pulsar en el titulo del proyecto
-function showDescription(title){
-    let projects = JSON.parse(localStorage.getItem('projects'));
+function showDescription(i){
+    //let projects = JSON.parse(localStorage.getItem('projects'));
 
-    for(let i = 0; i < projects.length; i++){
+    if(document.getElementById("d"+i).style.display == "block"){
+        document.getElementById("d"+i).style.display = "none";
+    } else {
+        document.getElementById("d"+i).style.display = "block";
+    }
+
+
+    /*for(let i = 0; i < projects.length; i++){
         if(projects[i].title == title){
             let descripcion = projects[i].description;
+
             console.log(descripcion);
         }
     }
-    localStorage.setItem('projects', JSON.stringify(projects));
+    localStorage.setItem('projects', JSON.stringify(projects));*/
 }
