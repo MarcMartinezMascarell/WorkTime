@@ -40,9 +40,11 @@ function getProject() {
         let description = projects[i].description;
         projectsView.innerHTML += `<div class="card mb-3">
             <div class="card-body">
-                <a class="font-weight-bold" onclick="showDescription(${i})">${title}</a>
+                <a style="cursor:pointer" class="font-weight-bold mr-4" onclick="showDescription(${i})">${title}</a>
                 <p style="display:none" id="d` +i + `">${description}</p>
-                <a class="btn btn-danger ml-4" onclick="deleteProject('${title}')">Borrar</a>
+                <a class="btn btn-danger" onclick="deleteProject('${title}')">Borrar</a>
+                <a class="btn btn-success ml-2" onclick="beginCrono(${i})" id="iniciar`+i+`">Iniciar</a>
+                <p id="temporizador` +i + `" class="float-right">0</p>
             </div>
             <div>
 
@@ -73,7 +75,8 @@ function deleteProject(title){
 
 }
 
-/*function showDescription() {
+/*
+function showDescription() {
     var popup = document.getElementById("myPopup");
     popup.classList.toggle("show");
 }
@@ -81,21 +84,27 @@ function deleteProject(title){
 
 //Función para mostrar la descripción al pulsar en el titulo del proyecto
 function showDescription(i){
-    //let projects = JSON.parse(localStorage.getItem('projects'));
 
     if(document.getElementById("d"+i).style.display == "block"){
         document.getElementById("d"+i).style.display = "none";
     } else {
         document.getElementById("d"+i).style.display = "block";
     }
+}
 
+function beginCrono(i) {
+    let temporizador = document.getElementById("temporizador" + i);
+    let verify = false;
+    let time = 0, interval = 0;
 
-    /*for(let i = 0; i < projects.length; i++){
-        if(projects[i].title == title){
-            let descripcion = projects[i].description;
-
-            console.log(descripcion);
-        }
+    if(verify == false){
+        interval = setInterval(function(){
+            time += 0.1;
+            temporizador.innerHTML = time.toFixed(1);
+        }, 100);
+        verify = true;
+    } else {
+        verify = false;
+        clearInterval(interval);
     }
-    localStorage.setItem('projects', JSON.stringify(projects));*/
 }
