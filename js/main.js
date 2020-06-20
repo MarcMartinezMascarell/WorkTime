@@ -3,6 +3,7 @@ var projectsView = document.getElementById('projects');
 
 document.getElementById('formTask').addEventListener('submit', saveProject);
 
+verify = new array;
 
 //Función para guardar los proyectos en Local Storage
 function saveProject(e){
@@ -94,17 +95,16 @@ function showDescription(i){
 
 function beginCrono(i) {
     let temporizador = document.getElementById("temporizador" + i);
-    let verify = false;
     let time = 0, interval = 0;
-
-    if(verify == false){
+    let v = verify[i];
+    if(v == false){
         interval = setInterval(function(){
             time += 0.1;
             temporizador.innerHTML = time.toFixed(1);
         }, 100);
-        verify = true;
+        verify[i] = true;
     } else {
-        verify = false;
+        verify[i] = false;
         clearInterval(interval);
     }
 }
