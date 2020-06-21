@@ -97,11 +97,11 @@ function beginCrono(i) {
     let verify = false;
     let time = 0, interval = 0;
 
-    if(verify == false){
+    if(verify === false){
         interval = setInterval(function(){
-            time += 0.1;
-            temporizador.innerHTML = time.toFixed(1);
-        }, 100);
+            time += 1;
+            temporizador.innerHTML = time;
+        }, 1000);
         verify = true;
     } else {
         verify = false;
