@@ -3,7 +3,8 @@ var projectsView = document.getElementById('projects');
 
 document.getElementById('formTask').addEventListener('submit', saveProject);
 
-verify = new array;
+verify = new Array();
+v = false;
 
 //Función para guardar los proyectos en Local Storage
 function saveProject(e){
@@ -93,18 +94,23 @@ function showDescription(i){
     }
 }
 
+function begin(){
+    let v = false;
+    beginCrono(v, i);
+}
+
 function beginCrono(i) {
     let temporizador = document.getElementById("temporizador" + i);
     let time = 0, interval = 0;
-    let v = verify[i];
+    let v = false;
     if(v == false){
         interval = setInterval(function(){
             time += 0.1;
             temporizador.innerHTML = time.toFixed(1);
         }, 100);
-        verify[i] = true;
+        v = true;
     } else {
-        verify[i] = false;
+        v = false;
         clearInterval(interval);
     }
 }
