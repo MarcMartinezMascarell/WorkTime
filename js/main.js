@@ -1,12 +1,14 @@
-//Asignación variables
+//AsignaciÃ³n variables
 var projectsView = document.getElementById('projects');
 
 document.getElementById('formTask').addEventListener('submit', saveProject);
 
-verify = new Array();
-v = false;
+var verify = new Array();
+var cronos = new Array();
+var contadores = [0, 0, 0];
 
-//Función para guardar los proyectos en Local Storage
+
+//FunciÃ³n para guardar los proyectos en Local Storage
 function saveProject(e){
 
     let title = document.getElementById('title').value;
@@ -32,7 +34,7 @@ function saveProject(e){
     e.preventDefault();
 }
 
-//Función para añadir los proyectos guardados a la lista
+//FunciÃ³n para aÃ±adir los proyectos guardados a la lista
 function getProject() {
     let projects = JSON.parse(localStorage.getItem('projects'));
     projectsView.innerHTML = '';
@@ -45,13 +47,12 @@ function getProject() {
                 <a style="cursor:pointer" class="font-weight-bold mr-4" onclick="showDescription(${i})">${title}</a>
                 <p style="display:none" id="d` +i + `">${description}</p>
                 <a class="btn btn-danger" onclick="deleteProject('${title}')">Borrar</a>
-                <a class="btn btn-success ml-2" onclick="beginCrono(${i})" id="iniciar`+i+`">Iniciar</a>
+                <a class="btn btn-success ml-2" onclick="start(this, ` + i +`)">Iniciar</a>
                 <p id="temporizador` +i + `" class="float-right">0</p>
             </div>
             <div>
-
             </div>
-        </div>`
+        </div>`;
     }
 }
 
@@ -59,7 +60,7 @@ function getProject() {
 getProject();
 
 
-//Función para borrar proyectos al pulsar el boton de Borrar
+//FunciÃ³n para borrar proyectos al pulsar el boton de Borrar
 function deleteProject(title){
 
     let confirmation = confirm("Esta seguro que desea borrar el proyecto?");
@@ -84,7 +85,7 @@ function showDescription() {
 }
 */
 
-//Función para mostrar la descripción al pulsar en el titulo del proyecto
+//FunciÃ³n para mostrar la descripciÃ³n al pulsar en el titulo del proyecto
 function showDescription(i){
 
     if(document.getElementById("d"+i).style.display == "block"){
@@ -94,23 +95,36 @@ function showDescription(i){
     }
 }
 
-function begin(){
-    let v = false;
-    beginCrono(v, i);
-}
-
+/*
 function beginCrono(i) {
     let temporizador = document.getElementById("temporizador" + i);
-    let time = 0, interval = 0;
-    let v = false;
-    if(v == false){
+	
+    if(verify[i] == false){
+		time = contadores[i];
         interval = setInterval(function(){
-            time += 0.1;
-            temporizador.innerHTML = time.toFixed(1);
+			contadores[i] += 0.1;
+            temporizador.innerHTML = contadores[i].toFixed(1);
+			alert("Contador "+i+"="+contadores[i]);//Quitar!!
         }, 100);
-        v = true;
+		cronos[i] = interval;
+        verify[i] = true;
     } else {
-        v = false;
-        clearInterval(interval);
+        clearInterval(cronos[i]);
+    }
+}
+*/
+
+function start(d, i){
+	
+    if (d.innerHTML == "Parar"){
+        clearInterval(d.interval);
+        d.innerHTML='Reiniciar';
+    } else {
+        d.interval=setInterval(function(){
+			contadores[i] += 0.1;
+			document.getElementById("temporizador"+i).innerHTML = contadores[i].toFixed(1);
+    
+        },100);
+        d.innerHTML='Parar';
     }
 }
