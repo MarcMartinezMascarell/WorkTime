@@ -41,21 +41,27 @@ function getProject() {
     let projects = JSON.parse(localStorage.getItem('projects'));
     projectsView.innerHTML = '';
 
-    for(let i = 0; i < projects.length; i++){
-        let title = projects[i].title;
-        let description = projects[i].description;
-        projectsView.innerHTML += `<div class="card mb-3">
-            <div class="card-body">
-                <a style="cursor:pointer" class="font-weight-bold mr-4" onclick="showDescription(${i})">${title}</a>
-                <p style="display:none" id="d` +i + `">${description}</p>
-                <a class="btn btn-danger" onclick="deleteProject('${title}')">Borrar</a>
-                <a class="btn btn-success ml-2" onclick="start(this, ` + i +`)">Iniciar</a>
-                <p id="temporizador` +i + `" class="float-right">0</p>
-            </div>
-            <div>
-            </div>
-        </div>`;
+    if(localStorage.getItem('projects') === null) {
+        projects = [];
+    } else {
+        for(let i = 0; i < projects.length; i++){
+            let title = projects[i].title;
+            let description = projects[i].description;
+            projectsView.innerHTML += `<div class="card mb-3">
+                <div class="card-body">
+                    <a style="cursor:pointer" class="font-weight-bold mr-4" onclick="showDescription(${i})">${title}</a>
+                    <p style="display:none" id="d` +i + `">${description}</p>
+                    <a class="btn btn-danger" onclick="deleteProject('${title}')">Borrar</a>
+                    <a class="btn btn-success ml-2" onclick="start(this, ` + i +`)">Iniciar</a>
+                    <p id="temporizador` +i + `" class="float-right">0</p>
+                </div>
+                <div>
+                </div>
+            </div>`;
+        }
     }
+
+
 }
 
 //Actualizamos los proyectos por si acaso
