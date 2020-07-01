@@ -1,14 +1,14 @@
-//AsignaciÃ³n variables
+//Asignacion variables
 var projectsView = document.getElementById('projects');
 
 document.getElementById('formTask').addEventListener('submit', saveProject);
 
 var verify = new Array();
 var cronos = new Array();
-var contadores = [0, 0, 0];
+var contadores = [0, 0, 0, 0, 0, 0];
 
 
-//FunciÃ³n para guardar los proyectos en Local Storage
+//Funcion para guardar los proyectos en Local Storage
 function saveProject(e){
 
     let title = document.getElementById('title').value;
@@ -34,7 +34,7 @@ function saveProject(e){
     e.preventDefault();
 }
 
-//FunciÃ³n para aÃ±adir los proyectos guardados a la lista
+//Funcion para anyadir los proyectos guardados a la lista
 function getProject() {
     let projects = JSON.parse(localStorage.getItem('projects'));
     projectsView.innerHTML = '';
@@ -65,15 +65,15 @@ function deleteProject(title){
 
     let confirmation = confirm("Esta seguro que desea borrar el proyecto?");
     if(confirmation == true){
-    let projects = JSON.parse(localStorage.getItem('projects'));
+        let projects = JSON.parse(localStorage.getItem('projects'));
 
-    for(let i = 0; i < projects.length; i++){
-        if(projects[i].title == title){
-            projects.splice(i, 1);
+        for(let i = 0; i < projects.length; i++){
+            if(projects[i].title == title){
+                projects.splice(i, 1);
+            }
         }
-    }
-    localStorage.setItem('projects', JSON.stringify(projects));
-    getProject();
+        localStorage.setItem('projects', JSON.stringify(projects));
+        getProject();
     }
 
 }
@@ -118,13 +118,33 @@ function start(d, i){
 	
     if (d.innerHTML == "Parar"){
         clearInterval(d.interval);
+
+        //Estilos Boton
         d.innerHTML='Reiniciar';
+        d.classList.add("btn-outline-success");
+        d.classList.remove("btn-warning");
+        d.classList.remove("btn-success");
     } else {
         d.interval=setInterval(function(){
-			contadores[i] += 0.1;
-			document.getElementById("temporizador"+i).innerHTML = contadores[i].toFixed(1);
-    
-        },100);
+			contadores[i] += 1;
+			document.getElementById("temporizador"+i).innerHTML = secondsToString(contadores[i]);
+            
+        },1000);
+
+        //Estilos Boton
         d.innerHTML='Parar';
+        d.classList.add("btn-warning");
+        d.classList.remove("btn-outline-success");
     }
 }
+
+//Funcion segundos, minutos, horas
+function secondsToString(seconds) {
+    var hour = Math.floor(seconds / 3600);
+    hour = (hour < 10)? '0' + hour : hour;
+    var minute = Math.floor((seconds / 60) % 60);
+    minute = (minute < 10)? '0' + minute : minute;
+    var second = seconds % 60;
+    second = (second < 10)? '0' + second : second;
+    return hour + ':' + minute + ':' + second;
+  }
