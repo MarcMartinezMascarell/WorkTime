@@ -1,7 +1,9 @@
 //Asignacion variables
 var projectsView = document.getElementById('projects');
+var formTask = document.getElementById('formTask');
+var addButton = document.getElementById('addBtn');
 
-document.getElementById('formTask').addEventListener('submit', saveProject);
+formTask.addEventListener('submit', saveProject);
 
 var verify = new Array();
 var cronos = new Array();
@@ -148,3 +150,9 @@ function secondsToString(seconds) {
     second = (second < 10)? '0' + second : second;
     return hour + ':' + minute + ':' + second;
   }
+
+
+  //Mostrar Formulario añadir proyecto
+$("#addBtn").on("click", function(){
+    $('#formTask').toggle(300);
+});
